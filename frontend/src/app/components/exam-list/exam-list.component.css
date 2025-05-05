@@ -1,0 +1,47 @@
+
+  body {
+    background-color: #f3f4f6;
+  }
+
+  .card {
+    border-radius: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 120, 212, 0.15);
+  }
+
+  .card-title {
+    color: #097619;
+  }
+
+  .btn-outline-primary {
+    border-radius: 30px;
+    border-color: #01824c;;
+    color: #0078d4;
+    font-weight: 500;
+    transition: 0.3s ease;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #01824c;
+    color: rgba(0, 0, 0, 0.943);
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-right: 6px;
+  }
+
+  .badge-info {
+    background-color: #e0f0ff;
+    color: #0078d4;
+  }
+
+  .card-footer {
+    padding-bottom: 20px;
+  }

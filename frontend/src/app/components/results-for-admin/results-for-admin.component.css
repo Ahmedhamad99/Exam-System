@@ -1,0 +1,53 @@
+
+  body {
+    background-color: #f3f4f6;
+  }
+
+  .results-card {
+    margin-top: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 120, 212, 0.2);
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .results-header {
+    background-color: #25af43; 
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .results-table {
+    width: 100%;
+    margin: 0;
+  }
+
+  .results-table thead {
+    background-color: #e3f2fd;
+    color: #0078d4;
+  }
+
+  .results-table th, .results-table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .results-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .results-table tbody tr:hover {
+    background-color: #e0f0ff;
+  }
+
+  .no-results {
+    padding: 16px;
+    color: #6c757d;
+    text-align: center;
+    font-style: italic;
+  }

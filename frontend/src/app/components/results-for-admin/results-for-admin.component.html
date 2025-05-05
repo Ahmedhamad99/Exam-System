@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="results-card">
+    <div class="results-header text-center">All Student's Exam Results</div>
+    <div class="table-responsive">
+      <table class="table results-table" *ngIf="studentsResults.length; else noResults">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Exam</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of studentsResults">
+            <td>{{ result.username }}</td>
+            <td>{{ result.examTitle }}</td>
+            <td>{{ result.score }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noResults>
+        <div class="no-results">No results available.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

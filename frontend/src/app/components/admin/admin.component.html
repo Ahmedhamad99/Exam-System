@@ -1,0 +1,84 @@
+<div class="container py-5" style="max-width: 800px;">
+  <div class="card mb-5 border-0 shadow-sm rounded-4 bg-white">
+    <div class="card-header bg-light border-bottom rounded-top-4">
+      <h5 class="mb-0 text-success text-center fw-bold"><i class="bi bi-pencil-square me-2"></i>Create New Exam</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="examForm" (ngSubmit)="addExam()">
+        <div class="mb-3">
+          <label for="examTitle" class="form-label">Title</label>
+          <input type="text" class="form-control" id="examTitle" formControlName="title" placeholder="e.g., Math Final" required>
+          <div *ngIf="examForm.get('title')?.invalid && examForm.get('title')?.touched" class="text-danger small mt-1">
+            Title is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="examDescription" class="form-label">Description</label>
+          <input type="text" class="form-control" id="examDescription" formControlName="description" placeholder="Optional description">
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="examForm.invalid">
+          <i class="bi bi-plus-circle me-2"></i>Create Exam
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-5 border-0 shadow-sm rounded-4 bg-white">
+    <div class="card-header bg-light border-bottom rounded-top-4">
+      <h5 class="mb-0 text-success text-center fw-bold"><i class="bi bi-question-circle me-2"></i>Add Question</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
+        <div class="mb-3">
+          <label for="examId" class="form-label">Select Exam</label>
+          <select class="form-select" id="examId" formControlName="examId" required>
+            <option value="">-- Choose --</option>
+            <option *ngFor="let exam of exams; trackBy: trackByFn" [value]="exam._id">{{ exam.title }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="questionText" class="form-label">Question</label>
+          <input type="text" class="form-control" id="questionText" formControlName="text" placeholder="Type your question" required>
+        </div>
+        <div formArrayName="options">
+          <div *ngFor="let option of options.controls; let i = index; trackBy: trackByFn" class="mb-3">
+            <label for="option{{i}}" class="form-label">Option {{ i + 1 }}</label>
+            <input type="text" class="form-control" id="option{{i}}" [formControlName]="i" placeholder="Answer option" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="correctAnswer" class="form-label">Correct Answer</label>
+          <input type="text" class="form-control" id="correctAnswer" formControlName="correctAnswer" placeholder="Type correct answer" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100" [disabled]="questionForm.invalid">
+          <i class="bi bi-check2-circle me-2"></i>Save Question
+        </button>
+      </form>
+    </div>
+  </div>
+<div class="card border-0 shadow-sm rounded-4 bg-white">
+  <div class="card-header bg-light border-bottom rounded-top-4">
+    <h5 class="mb-0 text-success fw-bold text-center"><i class="bi bi-collection me-2"></i>Exam List</h5>
+  </div>
+  <div class="card-body">
+    <div *ngIf="exams.length; else noExams">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-body-tertiary rounded mb-3" *ngFor="let exam of exams; trackBy: trackByFn">
+          <div class="fw-semibold text-dark mb-2">{{ exam.title }}</div>
+          <ul class="list-group ps-3">
+            <li class="list-group-item border-0 py-1 ps-3 text-muted" *ngFor="let question of exam.questions; trackBy: trackByFn">
+              • {{ question.text }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noExams>
+      <p class="text-center text-muted">No exams added yet.</p>
+    </ng-template>
+  </div>
+</div>
+</div>
+
+
+

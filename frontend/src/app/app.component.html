@@ -1,0 +1,39 @@
+<router-outlet>
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+      <div class="container-fluid">
+        <a class="navbar-brand text-success fw-bold" routerLink="/exams">Examy</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item" *ngIf="!isLoggedIn()">
+              <a class="nav-link  px-3" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="!isLoggedIn()">
+              <a class="nav-link px-3" routerLink="/register">Register</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn()">
+              <a class="nav-link px-3" routerLink="/exams">Exams</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn() && !isAdmin()">
+              <a class="nav-link px-3" routerLink="/results">Results</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+              <a class="nav-link px-3" routerLink="/all-results">All Results</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+              <a class="nav-link px-3" routerLink="/admin">Add Exam</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn()">
+              <a class="nav-link px-3 text-danger" (click)="logout()" style="cursor: pointer;">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </router-outlet>
+  
+  

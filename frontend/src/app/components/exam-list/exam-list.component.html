@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-success fw-bold">Available Exams</h2>
+  <div class="row gy-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let exam of exams">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold text-center">{{ exam.title }}</h5>
+          <p class="card-text text-muted">{{ exam.description }}</p>
+          <div class="mb-2">
+            <span class="badge badge-info">⏱ {{ exam.duration }} mins</span>
+            <span class="badge badge-info">📄 {{ exam.questionCount }} questions</span>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-0 text-center">
+          <a [routerLink]="['/exams', exam._id]" class="btn btn-outline-primary w-100">
+            <i class="bi bi-pencil-square me-1"></i> Take Exam
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

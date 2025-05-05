@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-success text-white fw-bold">
+      Correct Exam Answers
+    </div>
+    <div class="card-body">
+      <div *ngIf="results.length; else noResults">
+        <div *ngFor="let result of results" class="mb-4">
+          <h5 class="text-dark">
+            📖 Exam: <span class="text-primary">{{ result.examId.title }}</span>
+          </h5>
+          <p class="mb-2">✅ Score: <strong>{{ result.correctCount }} / {{ result.totalQuestions }}</strong></p>
+
+          <ul *ngIf="result.results.length; else noCorrectAnswers" class="list-group list-group-flush mb-3">
+            <li *ngFor="let item of result.results" class="list-group-item">
+              <i class="bi bi-check-circle text-success me-2"></i>{{ item.question }}: <strong>Correct</strong>
+            </li>
+          </ul>
+
+          <ng-template #noCorrectAnswers>
+            <div class="alert alert-warning p-2">No correct answers for this exam.</div>
+          </ng-template>
+
+          <hr>
+        </div>
+      </div>
+
+      <ng-template #noResults>
+        <div class="alert alert-info">No results available.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

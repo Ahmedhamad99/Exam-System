@@ -1,0 +1,34 @@
+
+.navbar {
+    border-radius: 0 0 15px 15px;
+  }
+
+  .navbar .navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar .nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    transition: color 0.2s ease;
+    font-size: 1rem;
+  }
+
+  .navbar .nav-link:hover {
+    color: #00a339 !important;
+  }
+
+  .navbar .nav-link.active {
+    color: #0d6efd !important;
+    font-weight: 600;
+  }
+
+  .navbar-toggler {
+    outline: none;
+  }
+
+  body {
+    background-color: #dddcdc;
+    font-family: 'Segoe UI', sans-serif;
+  }
