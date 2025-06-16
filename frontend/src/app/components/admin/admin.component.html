@@ -1,84 +1,148 @@
 <div class="container py-5" style="max-width: 800px;">
-  <div class="card mb-5 border-0 shadow-sm rounded-4 bg-white">
-    <div class="card-header bg-light border-bottom rounded-top-4">
-      <h5 class="mb-0 text-success text-center fw-bold"><i class="bi bi-pencil-square me-2"></i>Create New Exam</h5>
-    </div>
+
+  
+  <div class="card mb-5 border-0 shadow-lg rounded-4 bg-light"  style="background: linear-gradient(to right, #cbe3de, #0b1318);">
+   <div class="card-header bg-success text-white rounded-top-4 d-flex justify-content-center align-items-center" style="background: linear-gradient(to right, #06dab0, #0492eb);">
+  
+  <img src="./assets/quiz-logo.png" alt="Quiz Logo" class="exam-logo rounded shadow-sm me-3" style="max-width: 120px; height: auto;" />
+  
+  
+  <h5 class="mb-0 fw-bold">Create New Exam</h5>
+</div>
+
     <div class="card-body">
       <form [formGroup]="examForm" (ngSubmit)="addExam()">
         <div class="mb-3">
           <label for="examTitle" class="form-label">Title</label>
-          <input type="text" class="form-control" id="examTitle" formControlName="title" placeholder="e.g., Math Final" required>
+          <input type="text" class="form-control form-control-lg" id="examTitle" formControlName="title" placeholder="e.g., Math Final" required>
           <div *ngIf="examForm.get('title')?.invalid && examForm.get('title')?.touched" class="text-danger small mt-1">
             Title is required.
           </div>
         </div>
         <div class="mb-3">
           <label for="examDescription" class="form-label">Description</label>
-          <input type="text" class="form-control" id="examDescription" formControlName="description" placeholder="Optional description">
+          <input type="text" class="form-control form-control-lg" id="examDescription" formControlName="description" placeholder="Optional description">
         </div>
-        <button type="submit" class="btn btn-primary w-100" [disabled]="examForm.invalid">
+        <button type="submit" class="btn btn-primary w-100 btn-lg" [disabled]="examForm.invalid">
           <i class="bi bi-plus-circle me-2"></i>Create Exam
         </button>
       </form>
     </div>
   </div>
 
-  <div class="card mb-5 border-0 shadow-sm rounded-4 bg-white">
-    <div class="card-header bg-light border-bottom rounded-top-4">
-      <h5 class="mb-0 text-success text-center fw-bold"><i class="bi bi-question-circle me-2"></i>Add Question</h5>
+  
+  <div class="card mb-5 border-0 shadow-lg rounded-4 bg-light">
+    <div class="card-header bg-success text-white rounded-top-4" style="background: linear-gradient(to right, #4eb5a1, #0b1318);">
+      <h5 class="mb-0 text-center fw-bold" ><i class="bi bi-question-circle me-2"></i>Add Question</h5>
     </div>
     <div class="card-body">
       <form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
         <div class="mb-3">
           <label for="examId" class="form-label">Select Exam</label>
-          <select class="form-select" id="examId" formControlName="examId" required>
+          <select class="form-select form-select-lg" id="examId" formControlName="examId" required>
             <option value="">-- Choose --</option>
             <option *ngFor="let exam of exams; trackBy: trackByFn" [value]="exam._id">{{ exam.title }}</option>
           </select>
+          <div *ngIf="questionForm.get('examId')?.invalid && questionForm.get('examId')?.touched" class="text-danger small mt-1">
+            Exam selection is required.
+          </div>
         </div>
         <div class="mb-3">
           <label for="questionText" class="form-label">Question</label>
-          <input type="text" class="form-control" id="questionText" formControlName="text" placeholder="Type your question" required>
+          <input type="text" class="form-control form-control-lg" id="questionText" formControlName="text" placeholder="Type your question" required>
+          <div *ngIf="questionForm.get('text')?.invalid && questionForm.get('text')?.touched" class="text-danger small mt-1">
+            Question text is required.
+          </div>
         </div>
         <div formArrayName="options">
           <div *ngFor="let option of options.controls; let i = index; trackBy: trackByFn" class="mb-3">
             <label for="option{{i}}" class="form-label">Option {{ i + 1 }}</label>
-            <input type="text" class="form-control" id="option{{i}}" [formControlName]="i" placeholder="Answer option" required>
+            <input type="text" class="form-control form-control-lg" id="option{{i}}" [formControlName]="i" placeholder="Answer option" required>
+            <div *ngIf="options.controls[i].invalid && options.controls[i].touched" class="text-danger small mt-1">
+              Option is required.
+            </div>
           </div>
         </div>
         <div class="mb-3">
           <label for="correctAnswer" class="form-label">Correct Answer</label>
-          <input type="text" class="form-control" id="correctAnswer" formControlName="correctAnswer" placeholder="Type correct answer" required>
+          <select class="form-select form-select-lg" id="correctAnswer" formControlName="correctAnswer" required>
+            <option value="">-- Select Correct Answer --</option>
+            <option *ngFor="let option of options.value; let i = index" [value]="option">{{ option || 'Option ' + (i + 1) }}</option>
+          </select>
+          <div *ngIf="questionForm.get('correctAnswer')?.invalid && questionForm.get('correctAnswer')?.touched" class="text-danger small mt-1">
+            Correct answer is required.
+          </div>
         </div>
-        <button type="submit" class="btn btn-success w-100" [disabled]="questionForm.invalid">
+        <button type="submit" class="btn btn-success w-100 btn-lg" [disabled]="questionForm.invalid">
           <i class="bi bi-check2-circle me-2"></i>Save Question
         </button>
       </form>
     </div>
   </div>
-<div class="card border-0 shadow-sm rounded-4 bg-white">
-  <div class="card-header bg-light border-bottom rounded-top-4">
-    <h5 class="mb-0 text-success fw-bold text-center"><i class="bi bi-collection me-2"></i>Exam List</h5>
-  </div>
-  <div class="card-body">
-    <div *ngIf="exams.length; else noExams">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-body-tertiary rounded mb-3" *ngFor="let exam of exams; trackBy: trackByFn">
-          <div class="fw-semibold text-dark mb-2">{{ exam.title }}</div>
-          <ul class="list-group ps-3">
-            <li class="list-group-item border-0 py-1 ps-3 text-muted" *ngFor="let question of exam.questions; trackBy: trackByFn">
-              • {{ question.text }}
-            </li>
-          </ul>
-        </li>
-      </ul>
+
+  <div class="card border-0 shadow-lg rounded-4 bg-light">
+    <div class="card-header bg-success text-white rounded-top-4" style="background: linear-gradient(to right, #4eb5a1, #57a5d6);">
+      <h5 class="mb-0 fw-bold text-center"><i class="bi bi-collection me-2"></i>Exam List</h5>
     </div>
-    <ng-template #noExams>
-      <p class="text-center text-muted">No exams added yet.</p>
-    </ng-template>
+    <div class="card-body">
+      <div *ngIf="exams.length; else noExams">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-body-tertiary rounded mb-3" *ngFor="let exam of exams; trackBy: trackByFn" [attr.data-exam-id]="exam._id">
+            <div *ngIf="editingExamId !== exam._id; else editForm">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-semibold text-dark">{{ exam.title }}</div>
+                <div>
+                  <button class="btn btn-sm btn-outline-dark me-2" (click)="editExam(exam._id)">
+                    <i class="bi bi-pencil me-1"></i>Edit
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteExam(exam._id)">
+                    <i class="bi bi-trash me-1"></i>Delete
+                  </button>
+                </div>
+              </div>
+              <ul class="list-group ps-3">
+                <li class="list-group-item border-0 py-1 ps-3 text-muted" *ngFor="let question of exam.questions; trackBy: trackByFn">
+                  • {{ question.text }}
+                </li>
+              </ul>
+            </div>
+            <ng-template #editForm>
+              <form [formGroup]="editExamForm" (ngSubmit)="saveExam(exam._id)" class="edit-form">
+                <div class="mb-3">
+                  <label for="editExamTitle{{exam._id}}" class="form-label">Title</label>
+                  <input type="text" class="form-control form-control-lg" id="editExamTitle{{exam._id}}" formControlName="title" placeholder="e.g., Math Final" required>
+                  <div *ngIf="editExamForm.get('title')?.invalid && editExamForm.get('title')?.touched" class="text-danger small mt-1">
+                    Title is required.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="editExamDescription{{exam._id}}" class="form-label">Description</label>
+                  <input type="text" class="form-control form-control-lg" id="editExamDescription{{exam._id}}" formControlName="description" placeholder="Optional description">
+                </div>
+                <div class="mb-3">
+                  <label for="editExamQuestions{{exam._id}}" class="form-label">Questions</label>
+                  <select >
+                    <option *ngFor="let question of exam.questions; trackBy: trackByFn" [value]="question._id" formControlName="questionId" class="form-select">
+                      {{ question.text }}
+                      </option>
+                  </select>
+                </div>
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-primary w-100" [disabled]="editExamForm.invalid">
+                    <i class="bi bi-save me-2"></i>Save
+                  </button>
+                  <button type="button" class="btn btn-secondary w-100" (click)="cancelEdit()">
+                    <i class="bi bi-x-circle me-2"></i>Cancel
+                  </button>
+                </div>
+              </form>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noExams>
+        <p class="text-center text-muted">No exams added yet.</p>
+      </ng-template>
+    </div>
   </div>
 </div>
-</div>
-
-
-

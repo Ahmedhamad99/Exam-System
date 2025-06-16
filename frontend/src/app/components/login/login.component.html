@@ -1,0 +1,30 @@
+
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-4 p-md-5">
+          <img src="./assets/logo1.png" class="mb-4 logo mx-auto d-block" alt="Examy Logo" />
+
+            <h2 class="text-center mb-4 text-primary">Login</h2>
+            <form (ngSubmit)="login()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control rounded-pill px-4" id="email" [(ngModel)]="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control rounded-pill px-4" id="password" [(ngModel)]="password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100 rounded-pill mt-3">Login</button>
+              <p *ngIf="error" class="text-danger mt-3 text-center">{{ error }}</p>
+            </form>
+            <p class="text-center text-muted mt-4 mb-0">Don't have an account? <a href="./register" class="text-decoration-none text-primary">Register</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,58 +1,91 @@
-  body {
-    background-color: #f3f4f6; 
-  }
-  
-  .card {
-    background-color: rgba(255, 255, 255, 0.95); 
-  }
+body {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 300% 300%;
+  animation: gradient-background 8s ease infinite;
+}
 
-  .card-header {
-    background-color: #0078d4; 
-  }
+@keyframes gradient-background {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 
-  .btn-primary {
-    background-color: #4caf50; 
-    border: none;
-  }
 
-  .btn-primary:hover {
-    background-color: #45a049;
-  }
+.results-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  color: #fff;
+  animation: fadeInUp 1s ease;
+}
 
-  .form-control, .form-select {
-    border-radius: 30px; 
-    border-color: #0078d4;
-  }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  .form-label {
-    font-weight: 500;
-    color: #2d2d2d; 
-  }
 
-  .alert-warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border-radius: 8px;
-  }
+.card-header {
+  background: rgba(0, 128, 0, 0.8);
+  border-radius: 15px 15px 0 0;
+}
 
-  .alert-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border-radius: 8px;
-  }
+.correct-answers {
+  margin-top: 15px;
+}
 
-  .text-primary {
-    color: #0078d4 !important;
-  }
+.answer-item {
+  background: rgba(0, 255, 0, 0.1);
+  border-radius: 10px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
 
-  .text-dark {
-    color: #343a40;
-  }
+.answer-item:hover {
+  background: rgba(0, 255, 0, 0.2);
+  transform: scale(1.02);
+}
 
-  .fw-bold {
-    font-weight: 600;
-  }
 
-  .list-group-item {
-    border: none;
-  }
+.alert-success, .alert-warning, .alert-info {
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+
+.answer-item:hover .badge {
+  background: #198754;
+  color: #fff;
+}
+
+.badge {
+  font-size: 0.9rem;
+}
+
+
+h5, p {
+  word-wrap: break-word;
+}
+
+
+
+.card-header {
+  background: rgba(0, 128, 0, 0.8);
+  border-radius: 15px 15px 0 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.header-logo {
+  height: 40px;
+  width: 40px;
+  filter: drop-shadow(2px 4px 6px #000);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}

@@ -1,14 +1,15 @@
 <div class="container mt-5">
-  <h2 class="text-center mb-4 text-success fw-bold">Available Exams</h2>
+  <h2 class="text-center mb-4 text-dark fw-bold">Available Exams</h2>
   <div class="row gy-4">
     <div class="col-md-6 col-lg-4" *ngFor="let exam of exams">
       <div class="card h-100 shadow-sm border-0">
         <div class="card-body">
+          <img src="./assets/quiz-logo.png" alt="{{ exam.title }}" class="exam-logo rounded shadow-sm mb-3" />
           <h5 class="card-title fw-semibold text-center">{{ exam.title }}</h5>
           <p class="card-text text-muted">{{ exam.description }}</p>
           <div class="mb-2">
-            <span class="badge badge-info">⏱ {{ exam.duration }} mins</span>
-            <span class="badge badge-info">📄 {{ exam.questionCount }} questions</span>
+            <span class="badge badge-info">⏱ 60 mins</span>
+            <span class="badge badge-info">📄 30 questions</span>
           </div>
         </div>
         <div class="card-footer bg-transparent border-0 text-center">

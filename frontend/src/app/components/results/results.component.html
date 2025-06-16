@@ -1,24 +1,32 @@
 <div class="container mt-5">
-  <div class="card shadow-sm border-0">
-    <div class="card-header bg-success text-white fw-bold">
-      Correct Exam Answers
-    </div>
+  <div class="card results-card shadow-lg border-0 rounded-4">
+   <div class="card-header text-light fw-bold text-center d-flex align-items-center justify-content-center gap-3">
+  <img src="./assets/quiz-logo.png" alt="Quiz Logo" class="header-logo"> 
+  <span>Student Exam Results</span>
+</div>
+
     <div class="card-body">
       <div *ngIf="results.length; else noResults">
-        <div *ngFor="let result of results" class="mb-4">
+        <div *ngFor="let result of results" class="mb-4 result-item">
           <h5 class="text-dark">
             📖 Exam: <span class="text-primary">{{ result.examId.title }}</span>
           </h5>
-          <p class="mb-2">✅ Score: <strong>{{ result.correctCount }} / {{ result.totalQuestions }}</strong></p>
+          <p class="mb-2 text-success">
+            ✅ Score: <strong>{{ result.correctCount }} / {{ result.totalQuestions }}</strong>
+          </p>
 
-          <ul *ngIf="result.results.length; else noCorrectAnswers" class="list-group list-group-flush mb-3">
-            <li *ngFor="let item of result.results" class="list-group-item">
-              <i class="bi bi-check-circle text-success me-2"></i>{{ item.question }}: <strong>Correct</strong>
-            </li>
-          </ul>
+          <div *ngIf="result.results.length; else noCorrectAnswers" class="correct-answers">
+            <div class="alert alert-success p-2 text-center fw-bold">Correct Answers</div>
+            <ul class="list-group list-group-flush mb-3">
+              <li *ngFor="let item of result.results" class="list-group-item answer-item">
+                <i class="bi bi-check-circle-fill text-success me-2"></i>{{ item.question }}: 
+                <span class="badge bg-success">Correct</span>
+              </li>
+            </ul>
+          </div>
 
           <ng-template #noCorrectAnswers>
-            <div class="alert alert-warning p-2">No correct answers for this exam.</div>
+            <div class="alert alert-warning p-2 text-center">No correct answers for this exam.</div>
           </ng-template>
 
           <hr>
@@ -26,7 +34,7 @@
       </div>
 
       <ng-template #noResults>
-        <div class="alert alert-info">No results available.</div>
+        <div class="alert alert-info text-center">No results available.</div>
       </ng-template>
     </div>
   </div>

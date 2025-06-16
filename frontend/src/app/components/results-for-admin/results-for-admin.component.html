@@ -1,26 +1,35 @@
-<div class="container">
-  <div class="results-card">
-    <div class="results-header text-center">All Student's Exam Results</div>
-    <div class="table-responsive">
-      <table class="table results-table" *ngIf="studentsResults.length; else noResults">
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Exam</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let result of studentsResults">
-            <td>{{ result.username }}</td>
-            <td>{{ result.examTitle }}</td>
-            <td>{{ result.score }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <ng-template #noResults>
-        <div class="no-results">No results available.</div>
-      </ng-template>
+<div class="container py-5">
+  <div class="shadow-lg rounded-4 bg-light p-4">
+    <div class="results-header text-center mb-4 p-3 rounded-4"
+         style="background: linear-gradient(to right, #86dc75, #5e8ddf); color: white; font-size: 1.5rem; font-weight: bold;">
+      All Student's Exam Results
     </div>
+
+   
+ <div class="table-responsive">
+  <table class="table results-table table-hover ">
+    <thead class="table-dark table-head" >
+      <tr>
+        <th class="text-center">Student</th>
+        <th class="text-center">Exam</th>
+        <th class="text-center">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of studentsResults; let i = index" class="result-row" [ngClass]="{'highlight-row': i % 2 === 0}">
+        <td>{{ result.username }}</td>
+        <td>{{ result.examTitle }}</td>
+        <td>{{ result.score }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noResults>
+    <div class="no-results text-center text-muted">
+      <i class="bi bi-info-circle me-2"></i>No results available.
+    </div>
+  </ng-template>
+</div>
+
   </div>
 </div>

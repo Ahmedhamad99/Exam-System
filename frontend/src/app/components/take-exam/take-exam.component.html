@@ -1,0 +1,31 @@
+<div class="container" *ngIf="exam">
+  <div class="exam-wrapper">
+    <div class="exam-title">{{ exam.title }}</div>
+    <form (ngSubmit)="submitExam()">
+      <div *ngFor="let question of exam.questions; let i = index" class="question-box">
+        <div class="question-text">{{ question.text }}</div>
+        <div *ngFor="let option of question.options; let j = index" class="form-check mb-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            [id]="'q' + i + '_option' + j"
+            [(ngModel)]="answers[i]"
+            [value]="option"
+            [name]="'answer' + i"
+            required
+          />
+          <label class="form-check-label" [for]="'q' + i + '_option' + j">
+            {{ option }}
+          </label>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-submit btn-success">Submit Exam</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="!exam" class="loading-message">
+  Loading exam...
+</div>
